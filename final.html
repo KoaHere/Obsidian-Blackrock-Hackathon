@@ -4,49 +4,45 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Small Pots: money tools for students</title>
-<!-- Google Font Import -->
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-/* CSS Custom Properties / Color Palette derived from image swatch:
-   --bg: Pearl Beige (#E8DDB5)
-   --card: Pure White (#ffffff)
-   --ink: Blue Slate (#3A3D52 / #666A86)
-   --mut: Slate Grey (#5A6B7C)
-   --line: Celadon tint (#A8BBA2)
-   --a: Muted Teal (#92B6B1)
-   --b: Celadon (#B2C9AB)
-   --c: Warm Slate Accent (#666A86)
+/* 
+  COLOR PALETTE SYSTEM
+  Primary Dark: #666A86 (Blue Slate)
+  Secondary Dark: #788AA3 (Slate Grey)
+  Accent Brand: #92B6B1 (Muted Teal)
+  Light Accent: #B2C9AB (Celadon)
+  Background Soft: #E8DDB5 (Pearl Beige)
 */
 :root {
-  --bg: #F5EFE1;
-  --card: #FFFFFF;
-  --ink: #2C3040;
-  --mut: #5B6375;
-  --line: #D0D9CD;
-  --a: #528B83;
-  --b: #8AA782;
-  --c: #666A86;
-  --band: rgba(146, 182, 177, 0.25);
+  --bg: #f5f2e9;
+  --card: #ffffff;
+  --ink: #333848;
+  --mut: #666A86;
+  --line: #d8d3c5;
+  --a: #5a8a84;      /* Muted Teal primary */
+  --b: #788AA3;      /* Slate Grey accent */
+  --c: #c8553d;      /* Warning red */
+  --band: rgba(90, 138, 132, 0.2);
   box-sizing: border-box;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #1B1E28;
-    --card: #252A38;
-    --ink: #E8DDB5;
-    --mut: #A4B29E;
-    --line: #3D4658;
-    --a: #92B6B1;
-    --b: #B2C9AB;
-    --c: #788AA3;
-    --band: rgba(146, 182, 177, 0.2);
+    --bg: #1c1f26;
+    --card: #252a34;
+    --ink: #e8ddb5;
+    --mut: #92b6b1;
+    --line: #333848;
+    --a: #92b6b1;
+    --b: #788aa3;
+    --c: #ee7b63;
+    --band: rgba(146, 182, 177, 0.25);
   }
 }
 
 * { box-sizing: border-box; }
 html { scroll-padding-top: env(safe-area-inset-top, 0px); }
-
 body {
   margin: 0;
   background: var(--bg);
@@ -56,30 +52,12 @@ body {
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-.w {
-  max-width: 860px;
-  margin: 0 auto;
-  padding: 20px 16px 48px;
-}
-
-h1 {
-  font-size: clamp(28px, 6vw, 44px);
-  line-height: 1.05;
-  margin: 8px 0 6px;
-  font-weight: 800;
-  letter-spacing: -.02em;
-}
-
+.w { max-width: 860px; margin: 0 auto; padding: 20px 16px 48px; }
+h1 { font-size: clamp(28px, 6vw, 44px); line-height: 1.05; margin: 8px 0 6px; font-weight: 800; letter-spacing: -.02em; }
 .sub { color: var(--mut); margin: 0 0 18px; }
 
-/* Navigation Tab Bar */
-nav {
-  display: flex;
-  gap: 6px;
-  overflow-x: auto;
-  margin-bottom: 14px;
-}
-
+/* NAVIGATION TABS */
+nav { display: flex; gap: 6px; overflow-x: auto; margin-bottom: 14px; }
 nav button {
   flex: 1 0 auto;
   border: 1px solid var(--line);
@@ -90,47 +68,16 @@ nav button {
   font: inherit;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
 }
+nav button[aria-selected="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid var(--b); outline-offset: 2px; }
 
-nav button[aria-selected=true] {
-  background: var(--ink);
-  color: var(--bg);
-  border-color: var(--ink);
-}
-
-button:focus-visible, input:focus-visible, select:focus-visible {
-  outline: 3px solid var(--b);
-  outline-offset: 2px;
-}
-
-/* Sections & Cards Layout */
-section {
-  display: none;
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 18px;
-}
-
+/* SECTIONS AND CARD LAYOUT */
+section { display: none; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
 section.on { display: block; }
-
-.pitch {
-  font-size: 20px;
-  font-weight: 600;
-  margin: 0 0 14px;
-  max-width: 34ch;
-}
-
-.row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 12px;
-  margin: 12px 0;
-}
-
-label { display: block; font-size: 14px; color: var(--mut); }
-
+.pitch { font-size: 20px; font-weight: 600; margin: 0 0 14px; max-width: 38ch; }
+.row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 12px 0; }
+label { display: block; font-size: 14px; color: var(--mut); margin-bottom: 4px; }
 input, select {
   width: 100%;
   font: inherit;
@@ -140,91 +87,66 @@ input, select {
   background: var(--bg);
   color: var(--ink);
 }
+input[type="range"] { padding: 0; accent-color: var(--a); }
+input[type="checkbox"] { width: auto; }
 
-input[type=range] { padding: 0; accent-color: var(--a); }
-input[type=checkbox] { width: auto; }
-
-.big { font-size: 30px; font-weight: 800; line-height: 1.1; }
-
-.kpi {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 10px;
-  margin: 14px 0;
-}
-
-.kpi div {
-  border-left: 4px solid var(--a);
-  padding: 2px 10px;
-}
-
+/* KPI DISPLAY STATS */
+.big { font-size: 28px; font-weight: 800; line-height: 1.1; }
+.kpi { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 14px 0; }
+.kpi div { border-left: 4px solid var(--a); padding: 2px 10px; }
 .kpi small { display: block; color: var(--mut); }
 
-/* Visualization Graphics Styles */
+/* SVG AND CHARTS */
 svg { width: 100%; height: auto; display: block; }
 svg text { fill: var(--mut); font: 11px "Bricolage Grotesque", sans-serif; }
-
-.bar {
-  display: flex;
-  height: 34px;
-  border-radius: 8px;
-  overflow: hidden;
-  margin: 10px 0;
-}
-
-.leg {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 5px 0;
-  border-bottom: 1px solid var(--line);
-  font-size: 15px;
-}
-
-.dot {
-  display: inline-block;
-  width: 100px;
-  height: 10px;
-  border-radius: 50%;
-  margin-right: 8px;
-}
-
+.bar { display: flex; height: 34px; border-radius: 8px; overflow: hidden; margin: 10px 0; }
+.leg { display: flex; justify-content: space-between; gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; }
 .note { font-size: 13px; color: var(--mut); margin-top: 12px; }
-.verify { background: var(--b); color: #1B1E28; border-radius: 4px; padding: 0 5px; font-size: 12px; font-weight: 700; }
+.verify { background: var(--b); color: #fff; border-radius: 4px; padding: 0 5px; font-size: 12px; font-weight: 700; }
 .verdict { border: 2px solid var(--b); border-radius: 10px; padding: 12px; margin-top: 10px; font-weight: 600; }
-
-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+table { width: 100%; border-collapse: collapse; font-size: 15px; margin-top: 10px; }
 td, th { padding: 6px 4px; text-align: left; border-bottom: 1px solid var(--line); }
 </style>
 </head>
 <body>
 <div class="w">
-  <!-- Application Main Header -->
   <h1>Small pots, big futures.</h1>
-  <p class="sub">Four honest tools for rent, loans, first jobs and the long game. Illustrations, not promises.</p>
+  <p class="sub">Four honest tools for rent, loans, first jobs and the long game. Educational estimates only.</p>
+  
+  <!-- Navigation Tabs -->
   <nav role="tablist" id="tabs"></nav>
 
-  <!-- Feature Section 0: Compound Savings Growth Curve -->
-  <section id="s0" role="tabpanel" aria-labelledby="tab-0" class="on">
+  <!-- TAB 0: SAVINGS GROWTH CURVE -->
+  <section id="s0" role="tabpanel" aria-labelledby="tab-0">
     <p class="pitch">£20 a month feels like nothing. Here’s the curve that says otherwise.</p>
     <div class="row">
-      <div><label for="m0">Monthly saving: <b id="v0">£20</b></label><input id="m0" type="range" min="5" max="500" step="5" value="20"></div>
-      <div><label for="a0">Your age now</label><input id="a0" type="number" min="16" max="60" value="20"></div>
-      <div><label for="r0"><input id="r0" type="checkbox" checked> Show in today’s money</label><small class="note">Deflates at 2.5% inflation</small></div>
+      <div>
+        <label for="m0">Monthly saving: <b id="v0">£20</b></label>
+        <input id="m0" type="range" min="5" max="500" step="5" value="20">
+      </div>
+      <div>
+        <label for="a0">Your age now</label>
+        <input id="a0" type="number" min="16" max="60" value="20">
+      </div>
+      <div>
+        <label for="r0"><input id="r0" type="checkbox" checked> Show in today’s money</label>
+        <small class="note">Deflates at 2.5% inflation</small>
+      </div>
     </div>
     <div id="c0"></div>
     <table id="t0"></table>
     <p class="note">Low, mid and high scenarios assume 3%, 5% and 7% a year, compounded monthly, before fees. Real returns vary and can be negative.</p>
   </section>
 
-  <!-- Feature Section 1: Monthly Student Budget Allocator -->
+  <!-- TAB 1: BUDGET AND NET TAX CALCULATOR -->
   <section id="s1" role="tabpanel" aria-labelledby="tab-1">
     <p class="pitch">See where every pound goes before the month does it for you.</p>
     <div class="row" id="f1"></div>
     <div id="o1"></div>
   </section>
 
-  <!-- Feature Section 2: Retirement Income & Pension Projection -->
+  <!-- TAB 2: RETIREMENT & PENSION ESTIMATOR -->
   <section id="s2" role="tabpanel" aria-labelledby="tab-2">
     <p class="pitch">Retirement feels abstract at 20. This turns it into a monthly income figure.</p>
     <div class="row">
@@ -239,11 +161,18 @@ td, th { padding: 6px 4px; text-align: left; border-bottom: 1px solid var(--line
     <p class="note">Auto-enrolment minimum is 8% of qualifying earnings (£6,240 to £50,270): 5% you, 3% employer. Growth 5% a year, minus 2.5% inflation, so figures are in today’s money. Drawdown 4% a year. State pension: £241.30 a week <span class="verify">verify</span> at gov.uk, assumed to start at 67 <span class="verify">verify</span>.</p>
   </section>
 
-  <!-- Feature Section 3: Student Loan vs Overpayment / Investment Simulator -->
+  <!-- TAB 3: STUDENT LOAN STRATEGY ENGINE -->
   <section id="s3" role="tabpanel" aria-labelledby="tab-3">
     <p class="pitch">Most students are never told their loan behaves more like a graduate tax than a debt.</p>
     <div class="row">
-      <div><label for="pl3">Plan</label><select id="pl3"><option value="2">Plan 2 (England/Wales, 2012 to 2022)</option><option value="5">Plan 5 (England, from 2023)</option></select></div>
+      <div>
+        <label for="pl3">Plan</label>
+        <select id="pl3">
+          <option value="2">Plan 2 (England/Wales, 2012 to 2022)</option>
+          <option value="4">Plan 4 (Scotland, SAAS)</option>
+          <option value="5" selected>Plan 5 (England, from 2023)</option>
+        </select>
+      </div>
       <div><label for="bal3">Loan balance (£)</label><input id="bal3" type="number" value="45000" step="1000"></div>
       <div><label for="sal3">Starting salary (£)</label><input id="sal3" type="number" value="27000" step="1000"></div>
       <div><label for="g3">Salary growth %/yr</label><input id="g3" type="number" value="4" step="0.5"></div>
@@ -252,220 +181,304 @@ td, th { padding: 6px 4px; text-align: left; border-bottom: 1px solid var(--line
     </div>
     <div class="kpi" id="o3"></div>
     <div id="v3" class="verdict"></div>
-    <p class="note">Repay 9% of earnings above the threshold: Plan 2 £28,470 <span class="verify">verify</span>, written off after 30 years; Plan 5 £25,000 <span class="verify">verify</span>, after 40 years. Thresholds assumed to rise 3% a year. Investing assumes 5% a year. Check your plan on gov.uk. Not financial advice.</p>
+    <p class="note">Repay 9% of earnings above threshold: Plan 2 £28,470, Plan 4 £33,795 <span class="verify">verify</span>, Plan 5 £25,000 <span class="verify">verify</span>. Written off after 30 years (Plans 2 & 4) or 40 years (Plan 5). Thresholds assumed to rise 3% a year. Investing assumes 5% a year. Check your plan on gov.uk. Not financial advice.</p>
   </section>
 
-  <p class="note">Built for a hackathon to support financial wellbeing for young people. Educational estimates only, not regulated advice.</p>
+  <p class="note">Built for financial wellbeing for young people. Educational estimates only, not regulated advice.</p>
 </div>
 
 <script>
-window.addEventListener('DOMContentLoaded', () => {
-  // Utility helpers for DOM selection and British Pounds formatting
-  const $ = id => document.getElementById(id);
-  const f = n => (n < 0 ? '-' : '') + '£' + Math.round(Math.abs(n)).toLocaleString('en-GB');
-  const INF = 0.025; // 2.5% inflation baseline
-  const tabNames = ['Growth curve', 'Budget', 'Retirement', 'Student loan'];
+// DOM Helper and Constant Definitions
+const $ = id => document.getElementById(id);
+const f = n => (n < 0 ? '-' : '') + '£' + Math.round(Math.abs(n)).toLocaleString('en-GB');
+const INF = 0.025; // 2.5% Inflation Rate Deflator
 
-  // Dynamically render tab controls
-  const tabsContainer = $('tabs');
-  tabsContainer.innerHTML = '';
-  tabNames.forEach((n, i) => {
-    const b = document.createElement('button');
-    b.textContent = n;
-    b.role = 'tab';
-    b.id = 'tab-' + i;
-    b.setAttribute('aria-controls', 's' + i);
-    b.onclick = () => show(i);
-    tabsContainer.appendChild(b);
+// Navigation Tabs Array
+const names = ['Growth curve', 'Budget & Tax', 'Retirement', 'Student loan'];
+
+// Dynamic Tab Insertion
+names.forEach((n, i) => {
+  const b = document.createElement('button');
+  b.textContent = n;
+  b.role = 'tab';
+  b.id = 'tab-' + i;
+  b.setAttribute('aria-controls', 's' + i);
+  b.onclick = () => show(i);
+  $('tabs').appendChild(b);
+});
+
+// Show Tab Function
+function show(i) {
+  document.querySelectorAll('section').forEach((s, j) => s.classList.toggle('on', i === j));
+  [...$('tabs').children].forEach((b, j) => b.setAttribute('aria-selected', i === j));
+}
+
+// --------------------------------------------------------------------------
+// FEATURE 1: SAVINGS GROWTH CURVE CALCULATOR
+// --------------------------------------------------------------------------
+function growth_curve(m, rate, months, real) {
+  const r = Math.pow(1 + rate, 1 / 12) - 1;
+  const p = [0], c = [0];
+  let P = 0, C = 0;
+  for (let i = 1; i <= months; i++) {
+    const d = real ? Math.pow(1 + INF, i / 12) : 1;
+    P = P * (1 + r) + m;
+    C += m;
+    p.push(P / d);
+    c.push(C / d);
+  }
+  return { p, c };
+}
+
+function f1() {
+  const m = +$('m0').value, a = +$('a0').value, real = $('r0').checked, end = 65, mo = Math.max(12, (end - a) * 12);
+  $('v0').textContent = '£' + m;
+
+  const S = [0.03, 0.05, 0.07].map(r => growth_curve(m, r, mo, real));
+  const cont = S[1].c;
+
+  const W = 640, H = 300, L = 46, T = 12, B = 26;
+  const mx = Math.max(...S[2].p) * 1.05;
+  const X = i => L + (i / mo) * (W - L - 10);
+  const Y = v => T + (1 - v / mx) * (H - T - B);
+  const path = arr => arr.map((v, i) => (i ? 'L' : 'M') + X(i).toFixed(1) + ' ' + Y(v).toFixed(1)).join('');
+
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Pot growth chart">`;
+  for (let k = 0; k <= 4; k++) {
+    const v = (mx * k) / 4;
+    s += `<line x1="${L}" x2="${W - 10}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/>
+          <text x="4" y="${Y(v) + 4}">${f(v)}</text>`;
+  }
+  s += `<path d="${path(S[2].p)}L${[...S[0].p].reverse().map((v, i) => X(mo - i).toFixed(1) + ' ' + Y(v).toFixed(1)).join('L')}Z" fill="var(--band)"/>`;
+  s += `<path d="${path(cont)}" fill="none" stroke="var(--b)" stroke-width="2.5" stroke-dasharray="6 4"/>`;
+  s += `<path d="${path(S[1].p)}" fill="none" stroke="var(--a)" stroke-width="3"/>`;
+
+  let rows = '<tr><th>Age</th><th>You put in</th><th>Growth (mid)</th><th>Range (low to high)</th></tr>';
+  [30, 40, 60].filter(g => g > a).forEach(g => {
+    const i = (g - a) * 12;
+    if (i > mo) return;
+    s += `<line x1="${X(i)}" x2="${X(i)}" y1="${T}" y2="${H - B}" stroke="var(--ink)" stroke-dasharray="2 3"/>
+          <text x="${X(i) - 8}" y="${H - 8}">${g}</text>`;
+    rows += `<tr><td>${g}</td><td>${f(cont[i])}</td><td>${f(S[1].p[i] - cont[i])}</td><td><b>${f(S[0].p[i])} to ${f(S[2].p[i])}</b></td></tr>`;
   });
+  s += `</svg>`;
+  $('c0').innerHTML = s;
+  $('t0').innerHTML = rows;
+}
+['m0', 'a0', 'r0'].forEach(i => $(i).oninput = f1);
 
-  // Tab switching logic
-  function show(i) {
-    document.querySelectorAll('section').forEach((s, j) => s.classList.toggle('on', i == j));
-    [...$('tabs').children].forEach((b, j) => b.setAttribute('aria-selected', i == j));
-  }
+// --------------------------------------------------------------------------
+// FEATURE 2: BUDGET & SCOTTISH INCOME TAX CALCULATOR
+// --------------------------------------------------------------------------
+const fields = [
+  ['Tax Region', 'Scotland'],
+  ['Gross Income (wages/loan/parents)', 2000],
+  ['Rent and bills', 450],
+  ['Food and groceries', 160],
+  ['Transport', 40],
+  ['Phone and subscriptions', 35],
+  ['Going out', 80],
+  ['Course costs', 30],
+  ['Other', 40]
+];
+const cols = ['var(--ink)', 'var(--a)', 'var(--b)', 'var(--c)', '#6a8fd8', '#a06bc7', '#7aa35a', '#999'];
 
-  // Feature 1 Helper: Calculates compound growth curve with real inflation adjustments
-  function growth_curve(m, rate, months, real) {
-    const r = Math.pow(1 + rate, 1 / 12) - 1;
-    const p = [0], c = [0];
-    let P = 0, C = 0;
-    for (let i = 1; i <= months; i++) {
-      const d = real ? Math.pow(1 + INF, i / 12) : 1;
-      P = P * (1 + r) + m;
-      C += m;
-      p.push(P / d);
-      c.push(C / d);
+// Calculate Scottish vs RUK Income Tax
+function calculateMonthlyTax(monthlyGross, region) {
+  const annualGross = monthlyGross * 12;
+  let annualTax = 0;
+
+  if (region === 'Scotland') {
+    // Scottish Income Tax Bands
+    let taxable = Math.max(0, annualGross - 12570);
+    if (annualGross > 100000) {
+      let allowance = Math.max(0, 12570 - (annualGross - 100000) / 2);
+      taxable = Math.max(0, annualGross - allowance);
     }
-    return { p, c };
-  }
 
-  // Feature 1 Core: Renders SVG compound curve & summary table
-  function f1() {
-    const m = +$('m0').value, a = +$('a0').value, real = $('r0').checked;
-    const end = 65, mo = Math.max(12, (end - a) * 12);
-    $('v0').textContent = '£' + m;
+    const brackets = [
+      { limit: 3967, rate: 0.19 },   // Starter
+      { limit: 12989, rate: 0.20 },  // Basic
+      { limit: 14136, rate: 0.21 },  // Intermediate
+      { limit: 31338, rate: 0.42 },  // Higher
+      { limit: 50140, rate: 0.45 },  // Advanced
+      { limit: Infinity, rate: 0.48 }// Top
+    ];
 
-    const S = [0.03, 0.05, 0.07].map(r => growth_curve(m, r, mo, real));
-    const cont = S[1].c;
-
-    const W = 640, H = 300, L = 46, T = 12, B = 26;
-    const mx = Math.max(...S[2].p) * 1.05;
-    const X = i => L + i / mo * (W - L - 10);
-    const Y = v => T + (1 - v / mx) * (H - T - B);
-    const path = arr => arr.map((v, i) => (i ? 'L' : 'M') + X(i).toFixed(1) + ' ' + Y(v).toFixed(1)).join('');
-
-    let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Pot growth by age">`;
-    for (let k = 0; k <= 4; k++) {
-      const v = mx * k / 4;
-      s += `<line x1="${L}" x2="${W - 10}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/><text x="4" y="${Y(v) + 4}">${f(v)}</text>`;
+    let rem = taxable;
+    for (let b of brackets) {
+      const slice = Math.min(rem, b.limit);
+      annualTax += slice * b.rate;
+      rem -= slice;
+      if (rem <= 0) break;
     }
-    s += `<path d="${path(S[2].p)}L${[...S[0].p].reverse().map((v, i) => X(mo - i).toFixed(1) + ' ' + Y(v).toFixed(1)).join('L')}Z" fill="var(--band)"/>`;
-    s += `<path d="${path(cont)}" fill="none" stroke="var(--b)" stroke-width="2.5" stroke-dasharray="6 4"/>`;
-    s += `<path d="${path(S[1].p)}" fill="none" stroke="var(--a)" stroke-width="3"/>`;
-
-    let rows = '<tr><th>Age</th><th>You put in</th><th>Growth (mid)</th><th>Range (low to high)</th></tr>';
-    [30, 40, 60].filter(g => g > a).forEach(g => {
-      const i = (g - a) * 12;
-      if (i > mo) return;
-      s += `<line x1="${X(i)}" x2="${X(i)}" y1="${T}" y2="${H - B}" stroke="var(--ink)" stroke-dasharray="2 3"/><text x="${X(i) - 8}" y="${H - 8}">${g}</text>`;
-      rows += `<tr><td>${g}</td><td>${f(cont[i])}</td><td>${f(S[1].p[i] - cont[i])}</td><td><b>${f(S[0].p[i])} to ${f(S[2].p[i])}</b></td></tr>`;
-    });
-    s += `<text x="${L + 6}" y="${T + 12}">Shaded: 3% to 7%. Solid: 5%. Dashed: contributions.</text></svg>`;
-    $('c0').innerHTML = s;
-    $('t0').innerHTML = rows;
+  } else {
+    // Rest of UK Tax Bands
+    const taxable = Math.max(0, annualGross - 12570);
+    const basicSlice = Math.min(taxable, 37700);
+    const higherSlice = Math.max(0, taxable - 37700);
+    annualTax = (basicSlice * 0.20) + (higherSlice * 0.40);
   }
-  ['m0', 'a0', 'r0'].forEach(i => $(i).oninput = () => { f1(); f2(); });
 
-  // Feature 2 Core: Student Monthly Budget Breakdown
-  const fields = [
-    ['Income (loan, wages, parents)', 900],
-    ['Rent and bills', 450],
-    ['Food and groceries', 160],
-    ['Transport', 40],
-    ['Phone and subscriptions', 35],
-    ['Going out', 80],
-    ['Course costs', 30],
-    ['Other', 40]
-  ];
-  const cols = ['var(--ink)', 'var(--a)', 'var(--b)', 'var(--c)', '#788AA3', '#92B6B1', '#B2C9AB', '#5B6375'];
+  return annualTax / 12;
+}
+
+function initF2() {
+  $('f1').innerHTML = fields.map((x, i) => {
+    if (i === 0) {
+      return `<div><label for="b0">${x[0]}</label><select id="b0">
+        <option value="Scotland" selected>Scotland (Scottish Rates)</option>
+        <option value="UK">England, Wales & NI</option>
+      </select></div>`;
+    }
+    return `<div><label for="b${i}">${x[0]} (£/month)</label><input type="number" min="0" id="b${i}" value="${x[1]}"></div>`;
+  }).join('');
+}
+
+function f2() {
+  const region = $('b0').value;
+  const v = fields.slice(1).map((_, i) => Math.max(0, +$('b' + (i + 1)).value || 0));
   
-  $('f1').innerHTML = fields.map((x, i) => 
-    `<div><label for="b${i}">${x[0]} (£/month)</label><input type="number" min="0" id="b${i}" value="${x[1]}"></div>`
-  ).join('');
+  const grossInc = v[0];
+  const estimatedTax = calculateMonthlyTax(grossInc, region);
+  const netInc = Math.max(0, grossInc - estimatedTax);
+  
+  const sp = v.slice(1);
+  const tot = sp.reduce((a, b) => a + b, 0);
+  const left = netInc - tot;
+  const den = Math.max(netInc, tot) || 1;
 
-  function f2() {
-    const v = fields.map((_, i) => Math.max(0, +$('b' + i).value || 0));
-    const inc = v[0], sp = v.slice(1), tot = sp.reduce((a, b) => a + b, 0);
-    const left = inc - tot, den = Math.max(inc, tot) || 1;
+  let h = `<div class="note" style="margin-bottom:10px; font-weight:600; color:var(--a);">
+    Estimated Monthly Tax (${region}): ${f(estimatedTax)} | Net Take-Home: ${f(netInc)}
+  </div>`;
+
+  h += `<div class="bar" role="img" aria-label="Spending split">
+    ${sp.map((x, i) => `<div style="width:${(x / den) * 100}%;background:${cols[i + 1]}" title="${fields[i + 2][0]}"></div>`).join('')}
+    ${left > 0 ? `<div style="flex:1;background:var(--line)"></div>` : ''}
+  </div>`;
+  
+  h += sp.map((x, i) => `<div class="leg"><span><span class="dot" style="background:${cols[i + 1]}"></span>${fields[i + 2][0]}</span><b>${f(x)} (${netInc ? Math.round((x / netInc) * 100) : 0}%)</b></div>`).join('');
+  
+  h += `<div class="kpi">
+    <div><small>Total Spent</small><span class="big">${f(tot)}</span></div>
+    <div><small>${left >= 0 ? 'Left over' : 'Overspent'}</small><span class="big" style="color:${left >= 0 ? 'var(--a)' : 'var(--c)'}">${f(left)}</span></div>
+    <div><small>Per day</small><span class="big">${f(tot / 30)}</span></div>
+  </div>`;
+
+  if (left > 0) {
     const userAge = +$('a0').value || 20;
-
-    let h = `<div class="bar" role="img" aria-label="Spending split">${sp.map((x, i) => 
-      `<div style="width:${x / den * 100}%;background:${cols[i + 1]}" title="${fields[i + 1][0]}"></div>`
-    ).join('')}${left > 0 ? `<div style="flex:1;background:var(--line)"></div>` : ''}</div>`;
-
-    h += sp.map((x, i) => 
-      `<div class="leg"><span><span class="dot" style="background:${cols[i + 1]}"></span>${fields[i + 1][0]}</span><b>${f(x)} (${inc ? Math.round(x / inc * 100) : 0}%)</b></div>`
-    ).join('');
-
-    h += `<div class="kpi">
-      <div><small>Spent</small><span class="big">${f(tot)}</span></div>
-      <div><small>${left >= 0 ? 'Left over' : 'Overspent'}</small><span class="big" style="color:${left >= 0 ? 'var(--a)' : 'var(--c)'}">${f(left)}</span></div>
-      <div><small>Per day</small><span class="big">${f(tot / 30)}</span></div>
-    </div>`;
-
-    if (left > 0) {
-      const g = growth_curve(left, 0.05, (65 - userAge) * 12, true).p.slice(-1)[0];
-      h += `<p class="note">Rule of thumb: about 20% of income to savings. Your ${f(left)} left over, invested monthly from ${userAge} to 65 at a mid 5% scenario, would be roughly ${f(g)} in today’s money.</p>`;
-    } else {
-      h += `<p class="note">You’re spending more than you receive. Look at the biggest bars first: rent aside, subscriptions and going out are the quickest to trim.</p>`;
-    }
-    $('o1').innerHTML = h;
+    const g = growth_curve(left, 0.05, (65 - userAge) * 12, true).p.slice(-1)[0];
+    h += `<p class="note">Your ${f(left)} left over, invested monthly from age ${userAge} to 65 at a mid 5% scenario, would be roughly ${f(g)} in today’s money.</p>`;
+  } else {
+    h += `<p class="note">You’re spending more than your net income. Check subscriptions and leisure lines to rebalance.</p>`;
   }
-  fields.forEach((_, i) => $('b' + i).oninput = f2);
+  
+  $('o1').innerHTML = h;
+}
 
-  // Feature 3 Core: Retirement Income Calculator
-  function f3() {
-    const n = k => +$(k).value || 0;
-    const age = n('age2'), ret = n('ret2'), sal = n('sal2'), yrs = Math.max(0, ret - age);
-    const r = Math.pow(1.05 / 1.025, 1 / 12) - 1;
-    const q = Math.max(0, Math.min(sal, 50270) - 6240);
-    const m = q * (n('emp2') + n('er2')) / 100 / 12;
+// --------------------------------------------------------------------------
+// FEATURE 3: RETIREMENT & PENSION ESTIMATOR
+// --------------------------------------------------------------------------
+function f3() {
+  const n = k => +$(k).value || 0,
+        age = n('age2'),
+        ret = n('ret2'),
+        sal = n('sal2'),
+        yrs = Math.max(0, ret - age),
+        r = Math.pow(1.05 / 1.025, 1 / 12) - 1,
+        q = Math.max(0, Math.min(sal, 50270) - 6240),
+        m = (q * (n('emp2') + n('er2'))) / 100 / 12;
 
-    let P = n('pot2');
-    for (let i = 0; i < yrs * 12; i++) P = P * (1 + r) + m;
+  let P = n('pot2');
+  for (let i = 0; i < yrs * 12; i++) P = P * (1 + r) + m;
 
-    const draw = P * 0.04;
-    const sp = 241.30 * 52;
-    const tot = draw + sp;
+  const draw = P * 0.04;
+  const sp = 241.30 * 52;
+  const tot = draw + sp;
 
-    $('o2').innerHTML = [
-      ['Estimated pot (today’s money)', f(P)],
-      ['Pension income a year', f(draw)],
-      ['State pension a year', f(sp)],
-      ['Total a month', f(tot / 12)]
-    ].map(x => `<div><small>${x[0]}</small><span class="big">${x[1]}</span></div>`).join('') + 
-    `<div><small>Paid in a month (you + employer)</small><span class="big">${f(m)}</span></div>`;
+  $('o2').innerHTML = [
+    ['Estimated pot (today’s money)', f(P)],
+    ['Pension income a year', f(draw)],
+    ['State pension a year', f(sp)],
+    ['Total a month', f(tot / 12)]
+  ].map(x => `<div><small>${x[0]}</small><span class="big">${x[1]}</span></div>`).join('') +
+  `<div><small>Paid in a month (you + employer)</small><span class="big">${f(m)}</span></div>`;
+}
+['age2', 'ret2', 'sal2', 'emp2', 'er2', 'pot2'].forEach(i => $(i).oninput = f3);
+
+// --------------------------------------------------------------------------
+// FEATURE 4: STUDENT LOAN STRATEGY ENGINE (INCLUDES PLAN 4 SCOTLAND)
+// --------------------------------------------------------------------------
+function simulate_loan(bal, sal, g, i, plan, extra) {
+  // Plan 4 threshold = £33,795; Plan 2 = £28,470; Plan 5 = £25,000
+  const th0 = plan === 4 ? 33795 : (plan === 2 ? 28470 : 25000);
+  const yrs = plan === 5 ? 40 : 30; // 30 years for Plan 2 & 4; 40 for Plan 5
+  
+  let mand = 0, ext = 0, first = null;
+  for (let y = 0; y < yrs && bal > 0; y++) {
+    const s = sal * Math.pow(1 + g, y);
+    const th = th0 * Math.pow(1.03, y);
+    bal *= 1 + i;
+    const m = Math.min(bal, Math.max(0, s - th) * 0.09);
+    if (first === null) first = m / 12;
+    bal -= m;
+    mand += m;
+    const e = Math.min(bal, extra * 12);
+    bal -= e;
+    ext += e;
   }
-  ['age2', 'ret2', 'sal2', 'emp2', 'er2', 'pot2'].forEach(i => $(i).oninput = f3);
+  return { mand, ext, first, written: Math.max(0, bal) };
+}
 
-  // Feature 4 Core: Student Loan vs Overpayment Simulator
-  function simulate_loan(bal, sal, g, i, plan, extra) {
-    const th0 = plan == 2 ? 28470 : 25000;
-    const yrs = plan == 2 ? 30 : 40;
-    let mand = 0, ext = 0, first = null;
+function compare_overpay_vs_invest(base, over, extra, yrs) {
+  const r = Math.pow(1.05, 1 / 12) - 1;
+  let P = 0;
+  for (let i = 0; i < yrs * 12; i++) P = P * (1 + r) + extra;
+  const saved = base.mand - over.mand, paid = over.ext, pot = P;
+  return { saved, paid, pot, netOver: saved - paid, gain: pot - extra * yrs * 12 };
+}
 
-    for (let y = 0; y < yrs && bal > 0; y++) {
-      const s = sal * Math.pow(1 + g, y);
-      const th = th0 * Math.pow(1.03, y);
-      bal *= 1 + i;
-      const m = Math.min(bal, Math.max(0, s - th) * 0.09);
-      if (first === null) first = m / 12;
-      bal -= m; mand += m;
-      const e = Math.min(bal, extra * 12);
-      bal -= e; ext += e;
-    }
-    return { mand, ext, first, written: Math.max(0, bal) };
+function f4() {
+  const n = k => +$(k).value || 0,
+        plan = +$('pl3').value,
+        bal = n('bal3'),
+        sal = n('sal3'),
+        g = n('g3') / 100,
+        i = n('i3') / 100,
+        x = n('x3'),
+        yrs = plan === 5 ? 40 : 30;
+
+  const b = simulate_loan(bal, sal, g, i, plan, 0),
+        o = simulate_loan(bal, sal, g, i, plan, x),
+        c = compare_overpay_vs_invest(b, o, x, yrs);
+
+  $('o3').innerHTML = [
+    ['Monthly repayment (year 1)', f(b.first)],
+    ['Total repaid', f(b.mand)],
+    ['Written off', f(b.written)],
+    ['Share written off', Math.round((b.written / (b.mand + b.written || 1)) * 100) + '%']
+  ].map(x => `<div><small>${x[0]}</small><span class="big">${x[1]}</span></div>`).join('');
+
+  let t;
+  if (b.written > 0 && c.netOver <= 0) {
+    t = `Don’t overpay. Your balance is mostly cleared by write-off, so your extra ${f(c.paid)} only cuts future repayments by ${f(c.saved)}. Invested instead at 5%, ${f(x)} a month could grow to about ${f(c.pot)} (${f(c.gain)} growth).`;
+  } else if (b.written > 0) {
+    t = `Close call. Overpaying saves ${f(c.saved)} of repayments for ${f(c.paid)} paid in (nets ${f(c.netOver)}). Investing could return roughly ${f(c.gain)} in growth, with market risk.`;
+  } else {
+    t = `Your loan is fully repaid within the term. Overpaying saves ${f(c.saved)} against ${f(c.paid)} paid in, comparable to a ${(i * 100).toFixed(1)}% guaranteed return.`;
   }
+  $('v3').textContent = t;
+}
+['pl3', 'bal3', 'sal3', 'g3', 'i3', 'x3'].forEach(i => $(i).oninput = f4);
 
-  function compare_overpay_vs_invest(base, over, extra, yrs) {
-    const r = Math.pow(1.05, 1 / 12) - 1;
-    let P = 0;
-    for (let i = 0; i < yrs * 12; i++) P = P * (1 + r) + extra;
-    const saved = base.mand - over.mand, paid = over.ext, pot = P;
-    return { saved, paid, pot, netOver: saved - paid, gain: pot - extra * yrs * 12 };
-  }
-
-  function f4() {
-    const n = k => +$(k).value || 0;
-    const plan = +$('pl3').value, bal = n('bal3'), sal = n('sal3');
-    const g = n('g3') / 100, i = n('i3') / 100, x = n('x3');
-    const yrs = plan == 2 ? 30 : 40;
-
-    const b = simulate_loan(bal, sal, g, i, plan, 0);
-    const o = simulate_loan(bal, sal, g, i, plan, x);
-    const c = compare_overpay_vs_invest(b, o, x, yrs);
-
-    $('o3').innerHTML = [
-      ['Monthly repayment (year 1)', f(b.first)],
-      ['Total repaid', f(b.mand)],
-      ['Written off', f(b.written)],
-      ['Share written off', Math.round(b.written / (b.mand + b.written || 1) * 100) + '%']
-    ].map(x => `<div><small>${x[0]}</small><span class="big">${x[1]}</span></div>`).join('');
-
-    let t;
-    if (b.written > 0 && c.netOver <= 0) {
-      t = `Don’t overpay. Your balance is mostly cleared by write-off, so your extra ${f(c.paid)} only cuts future repayments by ${f(c.saved)}. Invested instead at a mid 5% scenario, ${f(x)} a month could grow to about ${f(c.pot)} (${f(c.gain)} of it growth), with no promise.`;
-    } else if (b.written > 0) {
-      t = `Close call. Overpaying saves ${f(c.saved)} of repayments for ${f(c.paid)} paid in, so it nets ${f(c.netOver)}. Investing could return roughly ${f(c.gain)} in growth, but with risk.`;
-    } else {
-      t = `Your loan is fully repaid within the term, so each extra pound saves interest. Overpaying saves ${f(c.saved)} against ${f(c.paid)} paid in, comparable to a ${(i * 100).toFixed(1)}% guaranteed return. Compare that with investing risk.`;
-    }
-    $('v3').textContent = t;
-  }
-  ['pl3', 'bal3', 'sal3', 'g3', 'i3', 'x3'].forEach(i => $(i).oninput = f4);
-
-  // Trigger initial renders across all tools
+// Initial Load Event Listener
+document.addEventListener('DOMContentLoaded', () => {
+  initF2();
+  fields.forEach((_, i) => {
+    if (i === 0) $('b0').onchange = f2;
+    else $('b' + i).oninput = f2;
+  });
+  
   show(0);
   f1();
   f2();
