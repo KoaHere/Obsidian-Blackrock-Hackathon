@@ -1,0 +1,49 @@
+.Navbar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  color: white; 
+  background: #a347c2;
+}
+
+a {
+  display: block;
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: #555555;
+  color: white;
+}  
+body { 
+    background: #000000; 
+    color: white;
+
+
+
+} 
+footer { 
+    background:#d04bfd;
+} 
+
+h1 {color: #d58cee; 
+    background: #fffcd0;
+
+
+
+
+} 
+
+main { color: #d58cee;
+    background: #fffcd0; 
+
+}
+
+--text: #ffffff;
+
+--primary: #a347c2;
+--secondary: #d58cee;
+--accent: #d04bfd;
